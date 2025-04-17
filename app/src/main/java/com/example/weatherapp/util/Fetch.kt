@@ -2,10 +2,15 @@ package com.example.weatherapp.util
 
 import android.util.Log
 import com.example.weatherapp.data.CallState
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-suspend fun <T> fetch(api: suspend () -> Response<T>): CallState<T> {
-    return try {
+suspend fun <T> fetch(
+    api: suspend () -> Response<T>,
+    ioDispatcher: CoroutineDispatcher
+): CallState<T> = withContext(ioDispatcher) {
+    try {
         Log.d("NetworkCall", "Calling API...")
         val response = api()
         Log.d("NetworkCall", "API response received. Success: ${response.isSuccessful}")

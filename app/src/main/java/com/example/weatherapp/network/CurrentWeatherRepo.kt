@@ -4,15 +4,20 @@ import com.example.weatherapp.data.CallState
 import com.example.weatherapp.data.WeatherResponse
 import com.example.weatherapp.util.fetch
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
 @ViewModelScoped
 class CurrentWeatherRepo @Inject constructor(
-    private val service: Service
+    private val service: Service,
+    private val ioDispatcher: CoroutineDispatcher
 ) {
     suspend fun getCurrentWeather(
-        state: String
+        state: String,
     ): CallState<WeatherResponse> {
-        return fetch { service.getCurrentWeather(state) }
+        return fetch(
+            ioDispatcher = ioDispatcher,
+            api = { service.getCurrentWeather(state) }
+        )
     }
 }
