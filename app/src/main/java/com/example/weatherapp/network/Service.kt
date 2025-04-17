@@ -9,7 +9,6 @@ interface Service {
 
     @GET("current")
     suspend fun getCurrentWeather(
-        @Query("access_key") access_key: String,
         @Query("query") query: String
-    ) : Response<WeatherResponse>
+    ): Response<WeatherResponse>
 }
