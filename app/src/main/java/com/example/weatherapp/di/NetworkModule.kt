@@ -7,12 +7,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
-    private val baseUrl = "http://api.weatherstack.com/"
+    private val baseUrl = "https://api.weatherstack.com/"
 
     @Provides
     fun provideAuthInterceptor(): AuthInterceptor = AuthInterceptor()
@@ -26,6 +27,7 @@ class NetworkModule {
     @Provides
     fun provideRetrofit(client: OkHttpClient): Retrofit = Retrofit
         .Builder()
+        .addConverterFactory(MoshiConverterFactory.create())
         .client(client)
         .baseUrl(baseUrl)
         .build()

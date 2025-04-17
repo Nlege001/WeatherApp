@@ -12,7 +12,7 @@ data class Current(
     val wind_degree: Int,
     val wind_dir: String,
     val pressure: Int,
-    val precip: Int,
+    val precip: Float,
     val humidity: Int,
     val cloudcover: Int,
     val feelslike: Int,
