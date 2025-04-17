@@ -11,7 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.createGraph
+import com.example.weatherapp.composables.BottomNavigationBar
 import com.example.weatherapp.composables.CurrentWeatherScreen
+import com.example.weatherapp.data.ScreenRoute
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,16 +27,25 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 Scaffold(
                     contentWindowInsets = WindowInsets.systemBars,
+                    bottomBar = { BottomNavigationBar(navController) }
                 ) { innerPadding ->
+                    val graph =
+                        navController.createGraph(startDestination = ScreenRoute.CURRENT.route) {
+                            composable(route = ScreenRoute.CURRENT.route) {
+                                CurrentWeatherScreen()
+                            }
+                            composable(route = ScreenRoute.FORECAST.route) {
+                                // todo
+                            }
+                            composable(route = ScreenRoute.HISTORICAL.route) {
+                                // todo
+                            }
+                        }
                     NavHost(
                         navController,
-                        startDestination = "current",
+                        graph = graph,
                         modifier = Modifier.padding(innerPadding)
-                    ) {
-                        composable("current") {
-                            CurrentWeatherScreen()
-                        }
-                    }
+                    )
                 }
             }
         }
