@@ -1,6 +1,8 @@
 package com.example.weatherapp.data
 
 sealed class CallState<out T> {
+
+    object EmptyContent : CallState<Nothing>()
     object Loading : CallState<Nothing>()
 
     object Error : CallState<Nothing>()

@@ -113,5 +113,7 @@ dependencies {
     implementation(libs.retrofit.converter.moshi)
     implementation(libs.okhttp)
 
+    // glide
+    implementation(libs.glidecompose)
 
 }
