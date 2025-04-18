@@ -20,13 +20,16 @@ class SavedLocationViewModel @Inject constructor(
         MutableStateFlow<CallState<List<SavedLocationData>>>(CallState.EmptyContent)
     val savedLocations: StateFlow<CallState<List<SavedLocationData>>> = _savedLocations
 
-    init {
-        getSavedLocations()
-    }
-
     fun getSavedLocations() {
         viewModelScope.launch {
             _savedLocations.value = CallState.Loading
+            _savedLocations.value = repo.getLocations()
+        }
+    }
+
+    fun removeLocation(location: String) {
+        viewModelScope.launch {
+            repo.removeLocation(location)
             _savedLocations.value = repo.getLocations()
         }
     }

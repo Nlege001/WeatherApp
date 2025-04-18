@@ -5,4 +5,5 @@ data class SavedLocationData(
     val iconUrl: String,
     val temperature: Int,
     val feelsLike: Int,
+    val time: String,
 )

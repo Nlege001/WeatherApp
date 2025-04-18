@@ -28,7 +28,8 @@ class SavedLocationsRepo @Inject constructor(
                             locationName = body.location.name,
                             iconUrl = body.current.weather_icons.firstOrNull() ?: "",
                             temperature = body.current.temperature,
-                            feelsLike = body.current.feelslike
+                            feelsLike = body.current.feelslike,
+                            time = body.current.observation_time
                         )
                     }
                 } else null
@@ -38,5 +39,9 @@ class SavedLocationsRepo @Inject constructor(
         } catch (e: Exception) {
             CallState.Error
         }
+    }
+
+    suspend fun removeLocation(location: String) {
+        bookmarkDao.deleteLocation(location)
     }
 }
