@@ -15,6 +15,7 @@ import androidx.navigation.createGraph
 import com.example.weatherapp.composables.BottomNavigationBar
 import com.example.weatherapp.composables.CurrentWeatherScreen
 import com.example.weatherapp.composables.HistoricalWeatherScreen
+import com.example.weatherapp.composables.SavedLocationsScreen
 import com.example.weatherapp.data.ScreenRoute
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
                                 HistoricalWeatherScreen()
                             }
                             composable(route = ScreenRoute.BOOKMARKS.route) {
-                                // todo
+                                SavedLocationsScreen()
                             }
                         }
                     NavHost(

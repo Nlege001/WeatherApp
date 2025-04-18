@@ -2,6 +2,7 @@ package com.example.weatherapp.di
 
 import com.example.weatherapp.network.CurrentWeatherRepo
 import com.example.weatherapp.network.HistoricalWeatherRepo
+import com.example.weatherapp.network.SavedLocationsRepo
 import com.example.weatherapp.network.Service
 import com.example.weatherapp.room.BookmarkDao
 import dagger.Module
@@ -39,6 +40,19 @@ class RepoModule {
         return HistoricalWeatherRepo(
             service,
             ioDispatcher
+        )
+    }
+
+    @Provides
+    fun provideSavedLocationsRepo(
+        service: Service,
+        ioDispatcher: CoroutineDispatcher,
+        bookmarkDao: BookmarkDao
+    ): SavedLocationsRepo {
+        return SavedLocationsRepo(
+            service = service,
+            ioDispatcher = ioDispatcher,
+            bookmarkDao = bookmarkDao
         )
     }
 }
