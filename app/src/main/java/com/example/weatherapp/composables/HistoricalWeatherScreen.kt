@@ -175,6 +175,13 @@ fun HistoricalWeatherScreen(
                     modifier = Modifier.fillMaxSize(),
                     state = viewModel.historicalData.collectAsState().value,
                     onRefresh = {
+                        date.value?.let {
+                            viewModel.getHistoricalData(
+                                userInput.value,
+                                it,
+                                interval.value
+                            )
+                        }
                     },
                     emptyContent = {
                         Box(
