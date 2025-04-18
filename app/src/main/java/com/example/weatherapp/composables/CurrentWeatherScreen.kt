@@ -50,7 +50,6 @@ fun CurrentWeatherScreen(
     ) {
         val expanded = rememberSaveable { mutableStateOf(false) }
         SearchBar(
-            modifier = Modifier.padding(16.dp),
             inputField = {
                 SearchBarDefaults.InputField(
                     query = userInput.value,

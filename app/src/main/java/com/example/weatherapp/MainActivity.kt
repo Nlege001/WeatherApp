@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
 import com.example.weatherapp.composables.BottomNavigationBar
 import com.example.weatherapp.composables.CurrentWeatherScreen
+import com.example.weatherapp.composables.HistoricalWeatherScreen
 import com.example.weatherapp.data.ScreenRoute
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
                                 // todo
                             }
                             composable(route = ScreenRoute.HISTORICAL.route) {
-                                // todo
+                                HistoricalWeatherScreen()
                             }
                         }
                     NavHost(

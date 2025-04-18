@@ -25,6 +25,7 @@ retrofit = "2.9.0"
 okhttp = "4.12.0"
 moshi = "1.15.0"
 glide_compose = "1.0.0-beta01"
+sheets = "1.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -96,6 +97,7 @@ logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-intercep
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
 moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
 glidecompose = { module = "com.github.bumptech.glide:compose", version.ref = "glide_compose" }
+sheets-calendar = { module = "com.maxkeppeler.sheets-compose-dialogs:calendar", version.ref = "sheets" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

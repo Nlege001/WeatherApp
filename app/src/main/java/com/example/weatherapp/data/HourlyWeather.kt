@@ -1,0 +1,33 @@
+package com.example.weatherapp.data
+
+data class HourlyWeather(
+    val time: String,
+    val temperature: Int,
+    val wind_speed: Int,
+    val wind_degree: Int,
+    val wind_dir: String,
+    val weather_code: Int,
+    val weather_icons: List<String>,
+    val weather_descriptions: List<String>,
+    val precip: Double,
+    val humidity: Int,
+    val visibility: Int,
+    val pressure: Int,
+    val cloudcover: Int,
+    val heatindex: Int,
+    val dewpoint: Int,
+    val windchill: Int,
+    val windgust: Int,
+    val feelslike: Int,
+    val chanceofrain: Int,
+    val chanceofremdry: Int,
+    val chanceofwindy: Int,
+    val chanceofovercast: Int,
+    val chanceofsunshine: Int,
+    val chanceoffrost: Int,
+    val chanceofhightemp: Int,
+    val chanceoffog: Int,
+    val chanceofsnow: Int,
+    val chanceofthunder: Int,
+    val uv_index: Int
+)

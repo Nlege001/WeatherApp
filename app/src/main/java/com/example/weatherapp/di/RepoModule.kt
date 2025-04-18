@@ -1,6 +1,7 @@
 package com.example.weatherapp.di
 
 import com.example.weatherapp.network.CurrentWeatherRepo
+import com.example.weatherapp.network.HistoricalWeatherRepo
 import com.example.weatherapp.network.Service
 import dagger.Module
 import dagger.Provides
@@ -22,6 +23,17 @@ class RepoModule {
         ioDispatcher: CoroutineDispatcher
     ): CurrentWeatherRepo {
         return CurrentWeatherRepo(
+            service,
+            ioDispatcher
+        )
+    }
+
+    @Provides
+    fun provideHistoricalWeatherRepo(
+        service: Service,
+        ioDispatcher: CoroutineDispatcher
+    ): HistoricalWeatherRepo {
+        return HistoricalWeatherRepo(
             service,
             ioDispatcher
         )
