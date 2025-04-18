@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ListItem
@@ -26,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -35,6 +38,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.weatherapp.data.Current
 import com.example.weatherapp.data.WeatherResponse
 import com.example.weatherapp.viewmodel.CurrentWeatherViewModel
+import com.example.wpinterviewpractice.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,6 +47,7 @@ fun CurrentWeatherScreen(
 ) {
     val data = viewModel.currentWeatherResponse.collectAsState().value
     val autoComplete = viewModel.autoCompleteResponse.collectAsState().value
+    val isItemBookmarked = viewModel.isLocationBookmarked.collectAsState().value
 
     val userInput = rememberSaveable { mutableStateOf("") }
 
@@ -110,7 +115,11 @@ fun CurrentWeatherScreen(
                 }
             }
         ) {
-            WeatherScreen(it)
+            WeatherScreen(
+                data = it,
+                onBookmark = { viewModel.evalLocationBookmark(it) },
+                isItemBookmarked = isItemBookmarked
+            )
         }
     }
 }
@@ -118,63 +127,88 @@ fun CurrentWeatherScreen(
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun WeatherScreen(
-    data: WeatherResponse
+    data: WeatherResponse,
+    onBookmark: (String) -> Unit,
+    isItemBookmarked: Boolean
 ) {
     val current = data.current
     val location = data.location
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
-    ) {
-        // Location and Time
-        Text(
-            text = location.name,
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold
-        )
-        Text(
-            text = "${location.localtime} • ${current.weather_descriptions.firstOrNull() ?: ""}",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Weather Icon and Temp
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+    Box {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
         ) {
-            GlideImage(
-                model = current.weather_icons.firstOrNull(),
-                contentDescription = "Weather icon",
-                modifier = Modifier.size(64.dp),
-                contentScale = ContentScale.Fit
+            // Location and Time
+            Text(
+                text = location.name,
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "${location.localtime} • ${current.weather_descriptions.firstOrNull() ?: ""}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-            Column {
-                Text(
-                    text = "${current.temperature}°C",
-                    style = MaterialTheme.typography.displaySmall
+            // Weather Icon and Temp
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                GlideImage(
+                    model = current.weather_icons.firstOrNull(),
+                    contentDescription = "Weather icon",
+                    modifier = Modifier.size(64.dp),
+                    contentScale = ContentScale.Fit
                 )
-                Text(
-                    text = "Feels like ${current.feelslike}°C",
-                    style = MaterialTheme.typography.bodySmall
-                )
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Column {
+                    Text(
+                        text = "${current.temperature}°C",
+                        style = MaterialTheme.typography.displaySmall
+                    )
+                    Text(
+                        text = "Feels like ${current.feelslike}°C",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
             }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Additional Info
+            WeatherStats(current)
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Additional Info
-        WeatherStats(current)
+        IconButton(
+            modifier = Modifier.align(Alignment.TopEnd),
+            onClick = { onBookmark(location.name) }
+        ) {
+            Icon(
+                painter = painterResource(
+                    if (isItemBookmarked) {
+                        R.drawable.ic_bookmarked
+                    } else {
+                        R.drawable.ic_bookmark
+                    }
+                ),
+                contentDescription = "Bookmark",
+                tint = if (isItemBookmarked) {
+                    Color.Blue
+                } else {
+                    Color.DarkGray
+                }
+            )
+        }
     }
 }
 

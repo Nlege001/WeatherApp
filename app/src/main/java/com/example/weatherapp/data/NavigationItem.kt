@@ -15,7 +15,7 @@ data class NavigationItem(
                 NavigationItem(
                     icon = R.drawable.ic_current_weather,
                     route = ScreenRoute.CURRENT.route,
-                    text = "Current weather",
+                    text = "Location",
                 ),
                 NavigationItem(
                     icon = R.drawable.ic_forecast,
@@ -27,6 +27,11 @@ data class NavigationItem(
                     route = ScreenRoute.HISTORICAL.route,
                     text = "Historical",
                 ),
+                NavigationItem(
+                    icon = R.drawable.ic_bookmarks,
+                    route = ScreenRoute.BOOKMARKS.route,
+                    text = "Saved",
+                )
             )
         }
     }

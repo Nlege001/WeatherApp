@@ -41,6 +41,9 @@ class MainActivity : ComponentActivity() {
                             composable(route = ScreenRoute.HISTORICAL.route) {
                                 HistoricalWeatherScreen()
                             }
+                            composable(route = ScreenRoute.BOOKMARKS.route) {
+                                // todo
+                            }
                         }
                     NavHost(
                         navController,
