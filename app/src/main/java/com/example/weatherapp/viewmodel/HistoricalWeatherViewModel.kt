@@ -32,6 +32,7 @@ class HistoricalWeatherViewModel @Inject constructor(
 
     ) {
         viewModelScope.launch {
+            _historicalData.value = CallState.Loading
             _historicalData.value =
                 historicalWeatherRepo.getHistoricalData(userInput, date, interval)
         }

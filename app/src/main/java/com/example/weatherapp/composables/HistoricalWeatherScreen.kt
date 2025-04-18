@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -34,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -123,7 +125,8 @@ fun HistoricalWeatherScreen(
         )
 
         LazyColumn(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             item {
                 // Intervals
@@ -169,8 +172,25 @@ fun HistoricalWeatherScreen(
 
             item {
                 ViewStateCoordinator(
+                    modifier = Modifier.fillMaxSize(),
                     state = viewModel.historicalData.collectAsState().value,
-                    onRefresh = {}
+                    onRefresh = {
+                    },
+                    emptyContent = {
+                        Box(
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .fillMaxSize()
+                        ) {
+                            Text(
+                                modifier = Modifier.align(Alignment.Center),
+                                style = MaterialTheme.typography.headlineMedium,
+                                text = "Search a city/ country, provide dates and intervals to get historical weather data",
+                                textAlign = TextAlign.Center,
+                                color = Color.LightGray
+                            )
+                        }
+                    }
                 ) { data ->
                     val current = data.current
                     val location = data.location

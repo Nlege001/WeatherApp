@@ -27,6 +27,7 @@ class CurrentWeatherViewModel @Inject constructor(
 
     fun getCurrentWeather(userInput: String) {
         viewModelScope.launch {
+            _currentWeatherResponse.value = CallState.Loading
             _currentWeatherResponse.value = repo.getCurrentWeather(userInput)
         }
     }

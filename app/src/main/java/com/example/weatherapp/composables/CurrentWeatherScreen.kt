@@ -2,6 +2,7 @@ package com.example.weatherapp.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -91,7 +93,22 @@ fun CurrentWeatherScreen(
 
         ViewStateCoordinator(
             state = data,
-            onRefresh = { viewModel.getCurrentWeather(userInput.value) }
+            onRefresh = { viewModel.getCurrentWeather(userInput.value) },
+            emptyContent = {
+                Box(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxSize()
+                ) {
+                    Text(
+                        modifier = Modifier.align(Alignment.Center),
+                        style = MaterialTheme.typography.headlineMedium,
+                        text = "Search for a city/country to get current weather data",
+                        textAlign = TextAlign.Center,
+                        color = Color.LightGray
+                    )
+                }
+            }
         ) {
             WeatherScreen(it)
         }
