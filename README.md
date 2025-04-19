@@ -67,7 +67,7 @@ You’ll need to **provide your own API key** to run the app successfully.
 
 1. Sign up at [weatherapi.com](https://www.weatherstack.com/) or your provider of choice.
 2. Add your API key to your `local.properties`:
-3. Note: This APP uses a standard subscription or the auto complete feature will not work
+3. Note: This App uses a standard subscription version of the endpoints or the auto complete feature will not work. Reachout to me and I will be happy to provide an API key
 
 ## 🚀 Screen recording
 https://drive.google.com/file/d/1G-9PvcTA76wbNrwDd1Mf_h_qJSynpSwl/view?usp=sharing
