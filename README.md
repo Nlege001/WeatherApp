@@ -69,9 +69,13 @@ You’ll need to **provide your own API key** to run the app successfully.
 2. Add your API key to your `local.properties`:
 3. Note: This APP uses a standard subscription or the auto complete feature will not work
 
+## 🚀 Screen recording
+https://drive.google.com/file/d/1G-9PvcTA76wbNrwDd1Mf_h_qJSynpSwl/view?usp=sharing
+
 ```properties
 WEATHER_API_KEY=your_api_key_here
 
-## 🚀 Screen recording
+
+
 
 
