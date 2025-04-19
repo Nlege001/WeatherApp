@@ -15,6 +15,7 @@ import androidx.navigation.createGraph
 import com.example.weatherapp.composables.BottomNavigationBar
 import com.example.weatherapp.composables.CurrentWeatherScreen
 import com.example.weatherapp.composables.HistoricalWeatherScreen
+import com.example.weatherapp.composables.MarineForecastScreen
 import com.example.weatherapp.composables.SavedLocationsScreen
 import com.example.weatherapp.data.ScreenRoute
 import com.example.weatherapp.ui.theme.WeatherAppTheme
@@ -32,12 +33,12 @@ class MainActivity : ComponentActivity() {
                     bottomBar = { BottomNavigationBar(navController) }
                 ) { innerPadding ->
                     val graph =
-                        navController.createGraph(startDestination = ScreenRoute.CURRENT.route) {
+                        navController.createGraph(startDestination = ScreenRoute.FORECAST.route) {
+                            composable(route = ScreenRoute.FORECAST.route) {
+                                MarineForecastScreen()
+                            }
                             composable(route = ScreenRoute.CURRENT.route) {
                                 CurrentWeatherScreen()
-                            }
-                            composable(route = ScreenRoute.FORECAST.route) {
-                                // todo
                             }
                             composable(route = ScreenRoute.HISTORICAL.route) {
                                 HistoricalWeatherScreen()

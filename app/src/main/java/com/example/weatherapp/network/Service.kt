@@ -1,6 +1,7 @@
 package com.example.weatherapp.network
 
 import com.example.weatherapp.data.LocationSearchResponse
+import com.example.weatherapp.data.MarineForecastResponse
 import com.example.weatherapp.data.WeatherResponse
 import com.example.weatherapp.data.WeatherStackResponse
 import retrofit2.Response
@@ -24,6 +25,13 @@ interface Service {
         @Query("query") query: String,
         @Query("historical_date") date: String,
         @Query("hourly") hourly: Int?,
-        @Query("interval") interval	: Int?,
-    ) : Response<WeatherStackResponse>
+        @Query("interval") interval: Int?,
+    ): Response<WeatherStackResponse>
+
+    @GET("marine")
+    suspend fun getMarineWeather(
+        @Query("latitude") latitude: String,
+        @Query("longitude") longitude: String,
+        @Query("hourly") hourly: String,
+    ): Response<MarineForecastResponse>
 }

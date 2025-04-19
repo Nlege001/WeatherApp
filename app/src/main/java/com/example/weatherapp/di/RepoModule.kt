@@ -2,6 +2,7 @@ package com.example.weatherapp.di
 
 import com.example.weatherapp.network.CurrentWeatherRepo
 import com.example.weatherapp.network.HistoricalWeatherRepo
+import com.example.weatherapp.network.MyForecastRepo
 import com.example.weatherapp.network.SavedLocationsRepo
 import com.example.weatherapp.network.Service
 import com.example.weatherapp.room.BookmarkDao
@@ -53,6 +54,17 @@ class RepoModule {
             service = service,
             ioDispatcher = ioDispatcher,
             bookmarkDao = bookmarkDao
+        )
+    }
+
+    @Provides
+    fun provideMyForecastRepo(
+        service: Service,
+        ioDispatcher: CoroutineDispatcher
+    ): MyForecastRepo {
+        return MyForecastRepo(
+            service,
+            ioDispatcher
         )
     }
 }

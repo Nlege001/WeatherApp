@@ -13,14 +13,14 @@ data class NavigationItem(
         fun getNavigationItems(): List<NavigationItem> {
             return listOf(
                 NavigationItem(
+                    icon = R.drawable.ic_forecast,
+                    route = ScreenRoute.FORECAST.route,
+                    text = "My forecast",
+                ),
+                NavigationItem(
                     icon = R.drawable.ic_current_weather,
                     route = ScreenRoute.CURRENT.route,
                     text = "Location",
-                ),
-                NavigationItem(
-                    icon = R.drawable.ic_forecast,
-                    route = ScreenRoute.FORECAST.route,
-                    text = "Forecast",
                 ),
                 NavigationItem(
                     icon = R.drawable.ic_historical_forecast,

@@ -118,4 +118,6 @@ dependencies {
 
     implementation(libs.sheets.calendar)
 
+    implementation(libs.accompanist.permissions)
+    implementation(libs.play.services.location)
 }
