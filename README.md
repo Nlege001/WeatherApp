@@ -71,3 +71,7 @@ You’ll need to **provide your own API key** to run the app successfully.
 
 ```properties
 WEATHER_API_KEY=your_api_key_here
+
+## 🚀 Screen recording
+
+
