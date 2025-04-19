@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -39,11 +41,21 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     defaultConfig {
         applicationId = "com.example.wppractice2"
         testInstrumentationRunner = "com.example.wppractice2.ui.HiltTestRunner"
+    }
+
+    val weatherstackApiKey: String = project.rootProject.file("local.properties")
+        .inputStream()
+        .use { Properties().apply { load(it) } }
+        .getProperty("WEATHERSTACK_API_KEY") ?: error("API key not found")
+
+    defaultConfig {
+        buildConfigField("String", "WEATHERSTACK_API_KEY", weatherstackApiKey)
     }
 }
 
